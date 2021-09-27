@@ -110,5 +110,6 @@ int	main(int argc, char **argv)
 	nums_to_indexes(&stacks);
 	debug(&stacks);
 	radix_sort(&stacks, stacks.amount_of_integers);
+	debug(&stacks);
 	return (0);
 }
