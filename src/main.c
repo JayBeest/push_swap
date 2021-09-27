@@ -1,5 +1,8 @@
-#include <main.h>
-#include <libft.h>
+#include "incl/main.h"
+#include "../libft/libft.h"
+#include "incl/utils.h"
+#include "incl/radix.h"
+#include "incl/debug.h"
 
 #include <stdio.h>
 
@@ -91,19 +94,6 @@ void	nums_to_indexes(t_ps_stacks *stacks)
 	ft_bzero(stacks->stack_b, stacks->amount_of_integers * sizeof(int));
 }
 
-void	print_stack(int *stack, int stack_size)
-{
-	int	i;
-
-	i = 0;
-	while (i < stack_size)
-	{
-		printf("index %d: %d\n", i, stack[i]);
-		i++;
-	}
-
-}
-
 int	main(int argc, char **argv)
 {
 	t_ps_stacks	stacks;
@@ -118,7 +108,7 @@ int	main(int argc, char **argv)
 	if (!parse_arguments(argv, &stacks))
 		return (1);
 	nums_to_indexes(&stacks);
-//	print_stack(stacks.stack_a, stacks.stack_a_size);
-
+	debug(&stacks);
+	radix_sort(&stacks, stacks.amount_of_integers);
 	return (0);
 }

@@ -1,5 +1,8 @@
 NAME = 		push_swap
-SRC = 		main.c
+SRC = 		main.c \
+			utils.c \
+			radix.c \
+			debug.c
 SRC_DIR =	src
 OBJ_DIR	= 	$(SRC_DIR)/obj
 INCL = 		-I$(SRC_DIR)/incl
