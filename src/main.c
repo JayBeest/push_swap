@@ -9,7 +9,7 @@ void	init_num_to_stack(int num, int *stack, int amount_of_integers)
 
 	if (i < amount_of_integers)
 	{
-		*(stack + i) = num;
+		stack[i] = num;
 		i++;
 	}
 	else
@@ -30,7 +30,6 @@ int	duplicates(int *stack, int amount_of_integers)
 		duplicates = -1;
 		while (j < amount_of_integers)
 		{
-			printf("stack[i]: %d, stack[j]: %d  (i / j pointers: %p / %p)\n", stack[i], stack[j], &stack[i], &stack[j]);
 			if (stack[i] == stack[j])
 				duplicates++;
 			j++;
@@ -55,16 +54,17 @@ int parse_arguments(char **argv, t_ps_stacks *stacks)
 		while ((*argv)[i])
 		{
 			if (!ft_isdigit((*argv)[i]))
-				return (printf("Non digit in integer? :(\n"));
+				return (printf("Non digit in integer? :(\n"));  // error handling
 			i++;
 		}
 		num = ft_atoi(*argv);
 		if (num > 2147483647 || num < -2147483648)
-			return (printf("ONLY integers (check min/max) :(n"));
+			return (printf("ONLY integers (check min/max) :(n"));  // error handling
 		init_num_to_stack(num, stacks->stack_b, stacks->amount_of_integers);
 		argv++;
-		printf("duplicates: %d\n", duplicates(stacks->stack_b, stacks->amount_of_integers));
 	}
+	if (duplicates(stacks->stack_b, stacks->amount_of_integers))
+		return (0); // error handling
 	return (1);
 }
 
@@ -88,7 +88,7 @@ void	nums_to_indexes(t_ps_stacks *stacks)
 		stacks->stack_a[i] = smoller_count;
 		i++;
 	}
-//	ft_bzero(stacks->stack_b, stacks->amount_of_integers * sizeof(int));
+	ft_bzero(stacks->stack_b, stacks->amount_of_integers * sizeof(int));
 }
 
 void	print_stack(int *stack, int stack_size)
@@ -115,8 +115,10 @@ int	main(int argc, char **argv)
 	stacks.amount_of_integers = argc - 1;
 	stacks.stack_a_size = stacks.amount_of_integers;
 	stacks.stack_b_size = 0;
-	parse_arguments(argv, &stacks);
+	if (!parse_arguments(argv, &stacks))
+		return (1);
 	nums_to_indexes(&stacks);
-	print_stack(stacks.stack_a, stacks.stack_a_size);
+//	print_stack(stacks.stack_a, stacks.stack_a_size);
+
 	return (0);
 }

@@ -24,11 +24,11 @@ typedef struct s_bool_err
 
 typedef struct s_ps_stacks
 {
-	int	*stack_a;
-	int	*stack_b;
 	int amount_of_integers;
 	int	stack_a_size;
 	int stack_b_size;
+	int	*stack_a;
+	int	*stack_b;
 }			t_ps_stacks;
 
 #endif
