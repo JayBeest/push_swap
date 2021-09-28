@@ -13,6 +13,7 @@ typedef enum e_err_no
 	NO_ARGS,
 	NO_DIGIT,
 	NO_INT,
+	DUP_FOUND,
 	DEFAULT_ERROR
 }			t_err_no;
 

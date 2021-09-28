@@ -67,7 +67,7 @@ int parse_arguments(char **argv, t_ps_stacks *stacks)
 		argv++;
 	}
 	if (duplicates(stacks->stack_b, stacks->amount_of_integers))
-		return (0); // error handling
+		return (0); // error handling ->DUPS
 	return (1);
 }
 
@@ -94,6 +94,21 @@ void	nums_to_indexes(t_ps_stacks *stacks)
 	ft_bzero(stacks->stack_b, stacks->amount_of_integers * sizeof(int));
 }
 
+t_bool	ordered(int *stack, int amount_of_integers)
+{
+	int	i;
+
+	i = 0;
+	while (i < amount_of_integers)
+	{
+		if (stack[i] != i)
+			return (FALSE);
+		i++;
+	}
+	printf("Already ordered, nothing to be done\n");
+	return (TRUE);
+}
+
 int	main(int argc, char **argv)
 {
 	t_ps_stacks	stacks;
@@ -108,6 +123,8 @@ int	main(int argc, char **argv)
 	if (!parse_arguments(argv, &stacks))
 		return (1);
 	nums_to_indexes(&stacks);
+	if (ordered(stacks.stack_a, stacks.amount_of_integers))
+		return (1);// <---- or return (0)??!?
 	debug(&stacks);
 	radix_sort(&stacks, stacks.amount_of_integers);
 	debug(&stacks);
