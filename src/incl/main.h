@@ -42,6 +42,7 @@ typedef struct s_ps_stacks
 	int					amount_of_integers;
 	int					stack_a_size;
 	int					stack_b_size;
+	int 				amount_of_operations;
 	t_operation_list	operation_list;
 }			t_ps_stacks;
 

@@ -14,6 +14,7 @@ static void	pa_operation(t_ps_stacks *stacks)
 	stacks->stack_b_size--;
 	ft_memmove(stacks->stack_b, stacks->stack_b + 1, stacks->stack_b_size * sizeof(int));
 	printf("PA\n");
+	stacks->amount_of_operations++;
 }
 
 static void	pb_operation(t_ps_stacks *stacks)
@@ -26,6 +27,7 @@ static void	pb_operation(t_ps_stacks *stacks)
 	stacks->stack_a_size--;
 	ft_memmove(stacks->stack_a, stacks->stack_a + 1, stacks->stack_a_size * sizeof(int));
 	printf("PB\n");
+	stacks->amount_of_operations++;
 }
 
 static void	ra_operation(t_ps_stacks *stacks)
@@ -38,6 +40,7 @@ static void	ra_operation(t_ps_stacks *stacks)
 	ft_memmove(stacks->stack_a, stacks->stack_a + 1, (stacks->stack_a_size - 1) * sizeof(int));
 	stacks->stack_a[stacks->stack_a_size - 1] = temp;
 	printf("RA\n");
+	stacks->amount_of_operations++;
 }
 
 void	exec_operation(t_ps_stacks *stacks, t_operation op)
@@ -76,9 +79,7 @@ t_bool	all_same_bits(int *stack, int bit_n, int amount_of_integers)
 void	exec_radix_operations(t_ps_stacks *stacks, int current_bit)
 {
 	int	i;
-	int	ff_temp;
 
-	ff_temp = 0;
 	i = 0;
 	while (i < stacks->amount_of_integers)
 	{
@@ -96,7 +97,6 @@ void	exec_radix_operations(t_ps_stacks *stacks, int current_bit)
 		i--;
 		ff_temp++;
 	}
-	printf("AMOUNT OF OPS -----> %d\n", ff_temp);
 }
 
 void	radix_sort(t_ps_stacks *stacks, int amount_of_integers)
@@ -106,6 +106,7 @@ void	radix_sort(t_ps_stacks *stacks, int amount_of_integers)
 
 	max_bits_to_sort = 0;
 	current_bit = 0;
+	stacks->amount_of_operations = 0;
 	amount_of_integers -= 1;
 	while (amount_of_integers > 0)
 	{
@@ -118,4 +119,6 @@ void	radix_sort(t_ps_stacks *stacks, int amount_of_integers)
 			exec_radix_operations(stacks, current_bit);
 		current_bit++;
 	}
+	printf("AMOUNT OF OPS -----> %d\n", stacks->amount_of_operations);
+	stacks->amount_of_operations = 0;
 }
