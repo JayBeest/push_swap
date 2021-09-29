@@ -64,7 +64,14 @@ int parse_arguments(char **argv, t_ps_stacks *stacks)
 		argv++;
 	}
 	if (duplicates(stacks->stack_b, stacks->amount_of_integers))
+<<<<<<< HEAD
 		return (0);
+=======
+	{
+		printf("Duplicate integers :(\n");
+		return (0); // error handling ->DUPS
+	}
+>>>>>>> c4af5825a0bac1c538e094942546e66312a4a09d
 	return (1);
 }
 
