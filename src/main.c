@@ -40,7 +40,7 @@ t_bool	duplicates(int *stack, int amount_of_integers)
 	return (duplicates);
 }
 
-int parse_arguments(char **argv, t_ps_stacks *stacks)
+t_bool	parse_arguments(char **argv, t_ps_stacks *stacks)
 {
 	int 	i;
 	long	num;
@@ -54,25 +54,18 @@ int parse_arguments(char **argv, t_ps_stacks *stacks)
 		while ((*argv)[i])
 		{
 			if (!ft_isdigit((*argv)[i]))
-				return (0);
+				return (FALSE);
 			i++;
 		}
 		num = ft_atoi(*argv);
 		if (num > 2147483647 || num < -2147483648)
-			return (0);  // error handling out of range(int)
+			return (FALSE);
 		init_num_to_stack((int)num, stacks->stack_b, stacks->amount_of_integers);
 		argv++;
 	}
 	if (duplicates(stacks->stack_b, stacks->amount_of_integers))
-<<<<<<< HEAD
-		return (0);
-=======
-	{
-		printf("Duplicate integers :(\n");
-		return (0); // error handling ->DUPS
-	}
->>>>>>> c4af5825a0bac1c538e094942546e66312a4a09d
-	return (1);
+		return (FALSE);
+	return (TRUE);
 }
 
 void	nums_to_indexes(t_ps_stacks *stacks)
