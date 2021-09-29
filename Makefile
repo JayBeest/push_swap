@@ -1,7 +1,8 @@
 NAME = 		push_swap
 SRC = 		main.c \
-			utils.c \
-			radix.c \
+			operations.c \
+			custom_sort.c \
+			radix_sort.c \
 			debug.c
 SRC_DIR =	src
 OBJ_DIR	= 	$(SRC_DIR)/obj
