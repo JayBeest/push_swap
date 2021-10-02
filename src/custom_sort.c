@@ -38,20 +38,28 @@ static void	push_num_to_b(t_ps_stacks *stacks, int num)
 	exec_operation(stacks, PB);
 }
 
-static void	sort_four(t_ps_stacks *stacks)
+t_bool	done_already(int *stack)
 {
-	push_num_to_b(stacks, 0);
-	sort_three(stacks);
-	exec_operation(stacks, PA);
+	return (stack[0] < stack[1] && stack[1] < stack[2]);
 }
 
-static void	sort_five(t_ps_stacks *stacks)
+static void	sort_more_then_three(t_ps_stacks *stacks)
 {
-	push_num_to_b(stacks, 0);
-	push_num_to_b(stacks, 1);
-	sort_three(stacks);
-	exec_operation(stacks, PA);
-	exec_operation(stacks, PA);
+	int	i;
+
+	i = 0;
+	while (i < stacks->amount_of_integers - 3)
+	{
+		push_num_to_b(stacks, i);
+		i++;
+	}
+	if (!done_already(stacks->stack_a))
+		sort_three(stacks);
+	while (i > 0)
+	{
+		exec_operation(stacks, PA);
+		i--;
+	}
 }
 
 void	custom_sort(t_ps_stacks *stacks, int amount_of_integers)
@@ -60,8 +68,10 @@ void	custom_sort(t_ps_stacks *stacks, int amount_of_integers)
 		sort_two(stacks);
 	else if (amount_of_integers == 3)
 		sort_three(stacks);
-	else if (amount_of_integers == 4)
-		sort_four(stacks);
 	else
-		sort_five(stacks);
+		sort_more_then_three(stacks);
+//	else if (amount_of_integers == 4)
+//		sort_four(stacks);
+//	else
+//		sort_five(stacks);
 }

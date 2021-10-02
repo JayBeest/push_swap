@@ -3,6 +3,7 @@ SRC = 		main.c \
 			operations.c \
 			custom_sort.c \
 			radix_sort.c \
+			utils.c \
 			debug.c
 SRC_DIR =	src
 OBJ_DIR	= 	$(SRC_DIR)/obj

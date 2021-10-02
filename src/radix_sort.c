@@ -32,7 +32,7 @@ void	radix_sort(t_ps_stacks *stacks, int amount_of_integers)
 	amount_of_integers -= 1;
 	while (amount_of_integers > 0)
 	{
-		amount_of_integers = amount_of_integers / 2;
+		amount_of_integers = (amount_of_integers >> 1);
 		max_bits_to_sort++;
 	}
 	while (current_bit < max_bits_to_sort)
