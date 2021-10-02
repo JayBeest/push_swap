@@ -1,6 +1,7 @@
 NAME = 		push_swap
 SRC = 		main.c \
 			operations.c \
+			operations_2.c \
 			custom_sort.c \
 			radix_sort.c \
 			utils.c \

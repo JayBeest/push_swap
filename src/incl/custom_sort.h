@@ -3,6 +3,6 @@
 
 # include "main.h"
 
-void	custom_sort(t_ps_stacks *stacks, int amount_of_integers);
+void	sort(t_ps_stacks *stacks, int amount_of_integers);
 
 #endif

@@ -1,24 +1,29 @@
 #include "incl/custom_sort.h"
 #include "incl/operations.h"
+#include "incl/radix_sort.h"
+#include "incl/utils.h"
 
-static void	sort_two(t_ps_stacks *stacks)
+void	rotate_to_zero(t_ps_stacks *stacks, int amount_of_integers)
 {
-	exec_operation(stacks, RA);
-}
+	int	shift;
 
-static void	sort_three(t_ps_stacks *stacks)
-{
-	int	*stack;
-
-	stack = stacks->stack_a;
-	if (stack[0] < stack[1] && stack[0] < stack[2])
-		exec_operation(stacks, RRA);
-	else if (stack[0] > stack[1] && stack[0] > stack[2])
-		exec_operation(stacks, RA);
-	else if (stack[0] < stack[1] && stack[1] > stack[2])
-		exec_operation(stacks, RRA);
-	if (stack[1] < stack[0] && stack[1] < stack[2])
-		exec_operation(stacks, SA);
+	shift = stacks->stack_a[0];
+	if (shift <= amount_of_integers / 2)
+	{
+		while (shift > 0)
+		{
+			exec_operation(stacks, RRA);
+			shift--;
+		}
+	}
+	else
+	{
+		while (shift < amount_of_integers)
+		{
+			exec_operation(stacks, RA);
+			shift++;
+		}
+	}
 }
 
 static void	push_num_to_b(t_ps_stacks *stacks, int num)
@@ -38,9 +43,19 @@ static void	push_num_to_b(t_ps_stacks *stacks, int num)
 	exec_operation(stacks, PB);
 }
 
-t_bool	done_already(int *stack)
+static void	sort_three(t_ps_stacks *stacks)
 {
-	return (stack[0] < stack[1] && stack[1] < stack[2]);
+	int	*stack;
+
+	stack = stacks->stack_a;
+	if (stack[0] < stack[1] && stack[0] < stack[2])
+		exec_operation(stacks, RRA);
+	else if (stack[0] > stack[1] && stack[0] > stack[2])
+		exec_operation(stacks, RA);
+	else if (stack[0] < stack[1] && stack[1] > stack[2])
+		exec_operation(stacks, RRA);
+	if (stack[0] > stack[1] && stack[1] < stack[2])
+		exec_operation(stacks, SA);
 }
 
 static void	sort_more_then_three(t_ps_stacks *stacks)
@@ -62,16 +77,14 @@ static void	sort_more_then_three(t_ps_stacks *stacks)
 	}
 }
 
-void	custom_sort(t_ps_stacks *stacks, int amount_of_integers)
+void	sort(t_ps_stacks *stacks, int amount_of_integers)
 {
-	if (amount_of_integers == 2)
-		sort_two(stacks);
+	if (only_needs_rotates(stacks->stack_a, amount_of_integers))
+		rotate_to_zero(stacks, amount_of_integers);
 	else if (amount_of_integers == 3)
 		sort_three(stacks);
-	else
+	else if (amount_of_integers < 56)
 		sort_more_then_three(stacks);
-//	else if (amount_of_integers == 4)
-//		sort_four(stacks);
-//	else
-//		sort_five(stacks);
+	else
+		radix_sort(stacks, amount_of_integers);
 }

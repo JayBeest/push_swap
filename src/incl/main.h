@@ -32,6 +32,6 @@ typedef struct s_ps_stacks
 	t_operation_list	operation_list;
 }			t_ps_stacks;
 
-typedef void (*t_operation_ptr)(t_ps_stacks *);
+typedef void	(*t_operation_ptr)(t_ps_stacks *);
 
 #endif
