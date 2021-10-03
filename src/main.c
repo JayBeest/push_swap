@@ -1,9 +1,9 @@
-#include "incl/main.h"
-#include "../libft/libft.h"
-#include "incl/custom_sort.h"
-#include "incl/utils.h"
-
 #include <stdlib.h>
+#include <libft.h>
+#include <main.h>
+#include <custom_sort.h>
+#include <utils.h>
+
 
 int	init_stacks(t_ps_stacks *stacks, int argc)
 {

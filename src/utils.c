@@ -1,6 +1,6 @@
 #include <unistd.h>
 #include <stdlib.h>
-#include "incl/utils.h"
+#include <utils.h>
 
 t_bool	is_sorted(int *stack, int amount_of_integers)
 {

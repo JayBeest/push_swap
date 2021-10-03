@@ -1,5 +1,5 @@
-#include "incl/radix_sort.h"
-#include "incl/operations.h"
+#include <radix_sort.h>
+#include <operations.h>
 
 static void	exec_radix_operations(t_ps_stacks *stacks, int current_bit)
 {

@@ -1,8 +1,8 @@
-#include "incl/main.h"
-#include "incl/operations.h"
-#include "incl/operations_2.h"
-#include "../libft/libft.h"
 #include <unistd.h>
+#include <libft.h>
+#include <main.h>
+#include <operations.h>
+#include <operations_2.h>
 
 static void	pa_operation(t_ps_stacks *stacks)
 {

@@ -1,4 +1,4 @@
-#include "incl/operations_2.h"
+#include <operations_2.h>
 
 void	sa_operation(t_ps_stacks *stacks)
 {

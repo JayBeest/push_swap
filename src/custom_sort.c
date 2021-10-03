@@ -1,7 +1,7 @@
-#include "incl/custom_sort.h"
-#include "incl/operations.h"
-#include "incl/radix_sort.h"
-#include "incl/utils.h"
+#include <custom_sort.h>
+#include <operations.h>
+#include <radix_sort.h>
+#include <utils.h>
 
 void	rotate_to_zero(t_ps_stacks *stacks, int amount_of_integers)
 {
