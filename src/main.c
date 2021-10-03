@@ -4,6 +4,26 @@
 #include <custom_sort.h>
 #include <utils.h>
 
+void	nums_to_indexes(t_ps_stacks *stacks)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < stacks->amount_of_integers)
+	{
+		j = 0;
+		stacks->stack_a[i] = 0;
+		while (j < stacks->amount_of_integers)
+		{
+			if (stacks->stack_b[j] < stacks->stack_b[i])
+				stacks->stack_a[i]++;
+			j++;
+		}
+		i++;
+	}
+	ft_bzero(stacks->stack_b, stacks->amount_of_integers * sizeof(int));
+}
 
 int	init_stacks(t_ps_stacks *stacks, int argc)
 {
@@ -68,27 +88,6 @@ t_bool	parse_arguments(char **argv, t_ps_stacks *stacks)
 		argv++;
 	}
 	return (TRUE);
-}
-
-void	nums_to_indexes(t_ps_stacks *stacks)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < stacks->amount_of_integers)
-	{
-		j = 0;
-		stacks->stack_a[i] = 0;
-		while (j < stacks->amount_of_integers)
-		{
-			if (stacks->stack_b[j] < stacks->stack_b[i])
-				stacks->stack_a[i]++;
-			j++;
-		}
-		i++;
-	}
-	ft_bzero(stacks->stack_b, stacks->amount_of_integers * sizeof(int));
 }
 
 int	main(int argc, char **argv)

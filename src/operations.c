@@ -1,72 +1,62 @@
 #include <unistd.h>
 #include <libft.h>
-#include <main.h>
 #include <operations.h>
-#include <operations_2.h>
+#include <op_push_swap.h>
+#include <op_rotate.h>
 
-static void	pa_operation(t_ps_stacks *stacks)
+void	rr_operation(t_ps_stacks *stacks)
 {
-	if (stacks->stack_b_size == 0)
-		return ;
-	ft_memmove(stacks->stack_a + 1, stacks->stack_a, \
-		stacks->stack_a_size * sizeof(int));
-	stacks->stack_a[0] = stacks->stack_b[0];
-	stacks->stack_a_size++;
-	stacks->stack_b_size--;
-	ft_memmove(stacks->stack_b, stacks->stack_b + 1, \
-		stacks->stack_b_size * sizeof(int));
-	write(1, "pa\n", 3);
+	ra_operation(stacks);
+	rb_operation(stacks);
 }
 
-static void	pb_operation(t_ps_stacks *stacks)
+void	ss_operation(t_ps_stacks *stacks)
 {
-	if (stacks->stack_a_size == 0)
-		return ;
-	ft_memmove(stacks->stack_b + 1, stacks->stack_b, \
-		stacks->stack_b_size * sizeof(int));
-	stacks->stack_b[0] = stacks->stack_a[0];
-	stacks->stack_b_size++;
-	stacks->stack_a_size--;
-	ft_memmove(stacks->stack_a, stacks->stack_a + 1, \
-		stacks->stack_a_size * sizeof(int));
-	write(1, "pb\n", 3);
+	sa_operation(stacks);
+	sb_operation(stacks);
 }
 
-static void	ra_operation(t_ps_stacks *stacks)
+void	rrr_operation(t_ps_stacks *stacks)
 {
-	int	temp;
-
-	if (stacks->stack_a_size < 2)
-		return ;
-	temp = stacks->stack_a[0];
-	ft_memmove(stacks->stack_a, stacks->stack_a + 1, \
-		(stacks->stack_a_size - 1) * sizeof(int));
-	stacks->stack_a[stacks->stack_a_size - 1] = temp;
-	write(1, "ra\n", 3);
+	rra_operation(stacks);
+	rrb_operation(stacks);
 }
 
-static void	rra_operation(t_ps_stacks *stacks)
+void	print_op(t_operation op)
 {
-	int	temp;
+	static const char	*op_strings[11] = {
+		[PA] = "pa\n",
+		[PB] = "pb\n",
+		[SA] = "sa\n",
+		[SB] = "sb\n",
+		[SS] = "ss\n",
+		[RA] = "ra\n",
+		[RB] = "rb\n",
+		[RR] = "rr\n",
+		[RRA] = "rra\n",
+		[RRB] = "rra\n",
+		[RRR] = "rrr\n"
+	};
 
-	if (stacks->stack_a_size < 2)
-		return ;
-	temp = stacks->stack_a[stacks->stack_a_size - 1];
-	ft_memmove(stacks->stack_a + 1, stacks->stack_a, \
-		(stacks->stack_a_size - 1) * sizeof(int));
-	stacks->stack_a[0] = temp;
-	write(1, "rra\n", 4);
+	write(1, op_strings[op] , ft_strlen(op_strings[op]));
 }
 
 void	exec_operation(t_ps_stacks *stacks, t_operation op)
 {
-	static const t_operation_ptr	fun_ptr[5] = {
+	static const t_operation_ptr	fun_ptr[11] = {
 			[PA] = pa_operation,
 			[PB] = pb_operation,
+			[SA] = sa_operation,
+			[SB] = sb_operation,
+			[SS] = ss_operation,
 			[RA] = ra_operation,
+			[RB] = rb_operation,
+			[RR] = rr_operation,
 			[RRA] = rra_operation,
-			[SA] = sa_operation
+			[RRB] = rra_operation,
+			[RRR] = rrr_operation
 	};
 
 	fun_ptr[op](stacks);
+	print_op(op);
 }

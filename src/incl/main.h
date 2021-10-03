@@ -11,9 +11,16 @@ typedef enum e_operation
 {
 	PA,
 	PB,
+	SA,
+	SB,
+	SS,
 	RA,
+	RB,
+	RR,
 	RRA,
-	SA
+	RRB,
+	RRR
+
 }			t_operation;
 
 typedef struct s_operation_list

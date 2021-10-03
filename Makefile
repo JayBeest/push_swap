@@ -1,7 +1,8 @@
 NAME = 		push_swap
 SRC = 		main.c \
 			operations.c \
-			operations_2.c \
+			op_push_swap.c \
+			op_rotate.c \
 			custom_sort.c \
 			radix_sort.c \
 			utils.c \
@@ -9,7 +10,7 @@ SRC = 		main.c \
 SRC_DIR =	src
 OBJ_DIR	= 	$(SRC_DIR)/obj
 INCL = 		-I$(SRC_DIR)/incl
-C_FLAGS = 	-g -Wall -Wextra -Werror
+C_FLAGS = 	-Wall -Wextra -Werror
 OBJ = 		$(SRC:%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)

@@ -3,7 +3,7 @@
 #include <radix_sort.h>
 #include <utils.h>
 
-void	rotate_to_zero(t_ps_stacks *stacks, int amount_of_integers)
+static void	rotate_to_zero(t_ps_stacks *stacks, int amount_of_integers)
 {
 	int	shift;
 
