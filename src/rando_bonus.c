@@ -1,7 +1,7 @@
 #include <rando_bonus.h>
 #include <libft.h>
 #include <stdlib.h>
-#include <stdio.h>
+#include <unistd.h>
 #include <time.h>
 
 t_bool	duplicate(int *stack, int amount, int new_num)
@@ -25,7 +25,8 @@ void	print_stack(int *stack, int stack_size)
 	i = 0;
 	while (i < stack_size)
 	{
-		printf("index %d: %d\n", i, stack[i]);
+		ft_putnbr_fd(stack[i], 1);
+		write(1, " ", 1);
 		i++;
 	}
 }
@@ -64,13 +65,32 @@ t_bool	random_stack(int *stack, int amount, t_range range)
 	return (TRUE);
 }
 
-t_bool	parse_arguments(char **argv, t_range *range)
+t_bool	parse_one_arg(char **argv, t_range *range)
+{
+	int	i;
+
+	i = 0;
+	if (*argv[0] == '-' || *argv[0] == '+')
+		i++;
+	while ((*argv)[i])
+	{
+		if (!ft_isdigit((*argv)[i]))
+			return (FALSE);
+		i++;
+	}
+	range->amount_of_integers = ft_atoi(*argv);
+	if (range->amount_of_integers > 200000)
+		return (FALSE);
+	range->lower = 0;
+	range->upper = range->amount_of_integers + 10;
+	return (TRUE);
+}
+
+t_bool	parse_three_arg(char **argv, t_range *range)
 {
 	int		i;
 	int 	j;
-	long	num;
 
-	argv++;
 	j = 0;
 	while (*argv)
 	{
@@ -83,17 +103,26 @@ t_bool	parse_arguments(char **argv, t_range *range)
 				return (FALSE);
 			i++;
 		}
-		num = ft_atoi(*argv);
-		argv++;
 		if (j == 0)
-			range->lower = num;
+			range->lower = ft_atoi(*argv);
 		else if (j == 1)
-			range->upper = num;
-		else if (j == 2)
-			range->amount_of_integers = num;
+			range->upper = ft_atoi(*argv);
+		else
+			range->amount_of_integers = ft_atoi(*argv);
+		argv++;
 		j++;
 	}
 	return (TRUE);
+}
+
+t_bool	parse(int argc, char **argv, t_range *range)
+{
+	if (argc == 2)
+		return (parse_one_arg(argv + 1, range));
+	else if (argc == 4)
+		return (parse_three_arg(argv + 1, range));
+	else
+		return (FALSE);
 }
 
 int	main(int argc, char **argv)
@@ -101,12 +130,12 @@ int	main(int argc, char **argv)
 	int 	*stack;
 	t_range	range;
 
-	if (argc < 2 || !parse_arguments(argv, &range))
-		return (1);
+	parse(argc, argv, &range);
 	stack = NULL;
 	if (!malloc_stack(&stack, range.amount_of_integers))
 		return (1);
-	random_stack(stack, range.amount_of_integers, range);
+	if (!random_stack(stack, range.amount_of_integers, range))
+		return (1);
 	print_stack(stack, range.amount_of_integers);
 	free(stack);
 	return (0);

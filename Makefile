@@ -4,11 +4,12 @@ NAME3 =		rando
 SRC = 		main.c \
 			operations.c \
 			custom_sort.c \
-			radix_sort.c \
-			debug.c
-SHARE_SRC =	operations.c \
+			radix_sort.c
+SHARE_SRC =	parser.c \
+			operations.c \
 			op_push_swap.c \
 			op_rotate.c \
+			debug.c \
 			utils.c
 CHECK_SRC =	checker.c
 RANDO_SRC =	rando_bonus.c
