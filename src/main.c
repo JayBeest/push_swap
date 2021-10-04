@@ -4,6 +4,8 @@
 #include <custom_sort.h>
 #include <utils.h>
 
+#include <debug.h>
+
 void	nums_to_indexes(t_ps_stacks *stacks)
 {
 	int	i;
@@ -27,6 +29,7 @@ void	nums_to_indexes(t_ps_stacks *stacks)
 
 int	init_stacks(t_ps_stacks *stacks, int argc)
 {
+	stacks->amount_of_integers = argc - 1;
 	stacks->stack_a = malloc((argc - 1) * sizeof(int));
 	if (!stacks->stack_a)
 		return (0);
@@ -36,7 +39,6 @@ int	init_stacks(t_ps_stacks *stacks, int argc)
 		free (stacks->stack_a);
 		return (0);
 	}
-	stacks->amount_of_integers = argc - 1;
 	stacks->stack_a_size = stacks->amount_of_integers;
 	stacks->stack_b_size = 0;
 	return (1);
@@ -94,8 +96,12 @@ int	main(int argc, char **argv)
 {
 	t_ps_stacks	stacks;
 
-	if (!init_stacks(&stacks, argc))
-		return (1);
+//	if (!init_stacks(&stacks, argc))
+//		return (1);
+	init_stacks(&stacks, 100001);
+	debug(&stacks);
+	stacks.stack_a_size = argc;
+	return(free_stacks(&stacks, 0));
 	if (!parse_arguments(argv, &stacks) || duplicates(stacks.stack_b, \
 		stacks.amount_of_integers))
 		return (free_stacks(&stacks, 1));

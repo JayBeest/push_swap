@@ -7,6 +7,13 @@ typedef enum e_bool
 	TRUE
 }			t_bool;
 
+typedef struct s_range
+{
+	int lower;
+	int upper;
+	int	amount_of_integers;
+}			t_range;
+
 typedef enum e_operation
 {
 	PA,
