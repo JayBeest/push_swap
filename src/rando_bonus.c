@@ -1,4 +1,4 @@
-#include "incl/rando_bonus.h"
+#include <rando_bonus.h>
 #include <libft.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -68,26 +68,28 @@ t_bool	parse_arguments(char **argv, t_range *range)
 {
 	int		i;
 	int 	j;
-	int		num;
+	long	num;
 
-	j = 1;
-	while (argv[j])
+	argv++;
+	while (*argv)
 	{
 		i = 0;
-		if (argv[j][0] == '-' || argv[j][0] == '+')
+		j = 0;
+		if (*argv[0] == '-' || *argv[0] == '+')
 			i++;
-		while (argv[j][i])
+		while ((*argv)[i])
 		{
-			if (!ft_isdigit(argv[j][i]))
+			if (!ft_isdigit((*argv)[i]))
 				return (FALSE);
 			i++;
 		}
-		num = ft_atoi(argv[j]);
-		if (j == 1)
+		num = ft_atoi(*argv);
+		argv++;
+		if (j == 0)
 			range->lower = num;
-		else if (j == 2)
+		else if (j == 1)
 			range->upper = num;
-		else if (j == 3)
+		else if (j == 2)
 			range->amount_of_integers = num;
 		j++;
 	}
@@ -99,8 +101,8 @@ int	main(int argc, char **argv)
 	int 	*stack;
 	t_range	range;
 
-//	if (argc < 2 || !parse_arguments(argv, &range))
-//		return (1);
+	if (argc < 2 || !parse_arguments(argv, &range))
+		return (1);
 	stack = NULL;
 	if (!malloc_stack(stack, range.amount_of_integers))
 		return (1);
