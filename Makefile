@@ -26,7 +26,7 @@ all: $(NAME)
 
 bonus: $(NAME) $(NAME2)
 
-rando: $(NAME3)
+rand: $(NAME3)
 
 $(NAME): $(OBJ) $(SHARE_OBJ)
 	$(MAKE) -C libft
