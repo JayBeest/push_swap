@@ -30,10 +30,10 @@ void	print_stack(int *stack, int stack_size)
 	}
 }
 
-int	malloc_stack(int *stack, int amount_of_integers)
+int	malloc_stack(int **stack, int amount_of_integers)
 {
-	stack = malloc((amount_of_integers) * sizeof(int));
-	if (!stack)
+	*stack = (int *)malloc((amount_of_integers) * sizeof(int));
+	if (!*stack)
 		return (0);
 	return (1);
 }
@@ -71,10 +71,10 @@ t_bool	parse_arguments(char **argv, t_range *range)
 	long	num;
 
 	argv++;
+	j = 0;
 	while (*argv)
 	{
 		i = 0;
-		j = 0;
 		if (*argv[0] == '-' || *argv[0] == '+')
 			i++;
 		while ((*argv)[i])
@@ -104,7 +104,7 @@ int	main(int argc, char **argv)
 	if (argc < 2 || !parse_arguments(argv, &range))
 		return (1);
 	stack = NULL;
-	if (!malloc_stack(stack, range.amount_of_integers))
+	if (!malloc_stack(&stack, range.amount_of_integers))
 		return (1);
 	random_stack(stack, range.amount_of_integers, range);
 	print_stack(stack, range.amount_of_integers);
