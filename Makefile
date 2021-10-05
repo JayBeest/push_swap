@@ -24,9 +24,7 @@ RANDO_OBJ = $(RANDO_SRC:%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
 
-bonus: $(NAME) $(NAME2)
-
-rand: $(NAME3)
+bonus: $(NAME) $(NAME2) $(NAME3)
 
 $(NAME): $(OBJ) $(SHARE_OBJ)
 	$(MAKE) -C libft
@@ -48,6 +46,6 @@ clean:
 
 fclean: clean
 	$(MAKE) fclean -C libft
-	rm -f $(NAME)
+	rm -f $(NAME) $(NAME2) $(NAME3)
 
 re: clean all
