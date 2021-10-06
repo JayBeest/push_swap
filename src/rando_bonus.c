@@ -82,7 +82,7 @@ t_bool	parse_one_arg(char **argv, t_range *range)
 	if (range->amount_of_integers > 200000)
 		return (FALSE);
 	range->lower = 0;
-	range->upper = range->amount_of_integers + 10;
+	range->upper = range->amount_of_integers + 100;
 	return (TRUE);
 }
 
@@ -130,7 +130,8 @@ int	main(int argc, char **argv)
 	int 	*stack;
 	t_range	range;
 
-	parse(argc, argv, &range);
+	if (!parse(argc, argv, &range))
+		return (1);
 	stack = NULL;
 	if (!malloc_stack(&stack, range.amount_of_integers))
 		return (1);
