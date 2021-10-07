@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcorneli <marvin@codam.nl>                 +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/07 16:21:30 by jcorneli          #+#    #+#             */
+/*   Updated: 2021/10/07 16:21:30 by jcorneli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <libft.h>
 #include <parser.h>
@@ -75,6 +87,8 @@ t_bool	parse_arguments(char **argv, t_ps_stacks *stacks)
 		i = 0;
 		if (*argv[0] == '-' || *argv[0] == '+')
 			i++;
+		if (!ft_isdigit((*argv)[i]))
+			return (FALSE);
 		while ((*argv)[i])
 		{
 			if (!ft_isdigit((*argv)[i]))
@@ -86,5 +100,5 @@ t_bool	parse_arguments(char **argv, t_ps_stacks *stacks)
 			stacks->amount_of_integers);
 		argv++;
 	}
-	return (TRUE);
+	return (num < MAX_INT && num > MIN_INT);
 }
