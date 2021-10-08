@@ -14,5 +14,5 @@ int	main(int argc, char **argv)
 		return (free_stacks(&stacks, 1));
 	nums_to_indexes(&stacks);
 	print_stack(stacks.stack_a, stacks.stack_a_size);
-	return (0);
+	return (free_stacks(&stacks, 0));
 }

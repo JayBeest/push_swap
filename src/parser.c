@@ -6,7 +6,7 @@
 /*   By: jcorneli <marvin@codam.nl>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 16:21:30 by jcorneli          #+#    #+#             */
-/*   Updated: 2021/10/07 16:21:30 by jcorneli         ###   ########.fr       */
+/*   Updated: 2021/10/08 14:43:00 by jcorneli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <libft.h>
 #include <parser.h>
 #include <utils.h>
+
+#include <stdio.h>
 
 int	init_stacks(t_ps_stacks *stacks, int argc)
 {
@@ -76,6 +78,13 @@ t_bool	duplicates(int *stack, int amount_of_integers)
 	return (duplicates);
 }
 
+t_bool	ft_too_long(char *arg)
+{
+	if (ft_strlen(arg) > 16)
+		return (TRUE);
+	return (FALSE);
+}
+
 t_bool	parse_arguments(char **argv, t_ps_stacks *stacks)
 {
 	int		i;
@@ -87,7 +96,7 @@ t_bool	parse_arguments(char **argv, t_ps_stacks *stacks)
 		i = 0;
 		if (*argv[0] == '-' || *argv[0] == '+')
 			i++;
-		if (!ft_isdigit((*argv)[i]))
+		if (!ft_isdigit((*argv)[i]) || ft_too_long(*argv))
 			return (FALSE);
 		while ((*argv)[i])
 		{
@@ -96,9 +105,11 @@ t_bool	parse_arguments(char **argv, t_ps_stacks *stacks)
 			i++;
 		}
 		num = ft_atoi(*argv);
+		if (num > MAX_INT || num < MIN_INT)
+			return (FALSE);
 		init_num_to_stack((int)num, stacks->stack_b, \
 			stacks->amount_of_integers);
 		argv++;
 	}
-	return (num < MAX_INT && num > MIN_INT);
+	return (TRUE);
 }

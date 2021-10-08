@@ -1,6 +1,9 @@
 #ifndef MAIN_H
 # define MAIN_H
 
+# define MAX_INT 2147483647
+# define MIN_INT -2147483648
+
 typedef enum e_bool
 {
 	FALSE,
