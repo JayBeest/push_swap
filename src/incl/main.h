@@ -29,7 +29,8 @@ typedef enum e_operation
 	RR,
 	RRA,
 	RRB,
-	RRR
+	RRR,
+	ERROR = -1
 
 }			t_operation;
 
