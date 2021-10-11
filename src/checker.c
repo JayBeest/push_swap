@@ -7,6 +7,7 @@
 int	main(int argc, char **argv)
 {
 	t_ps_stacks	stacks;
+	char		*next_operation
 
 	if (!init_stacks(&stacks, argc))
 		return (1);
@@ -14,5 +15,6 @@ int	main(int argc, char **argv)
 		return (free_stacks(&stacks, 1));
 	nums_to_indexes(&stacks);
 	print_stack(stacks.stack_a, stacks.stack_a_size);
+	while (get_next_line())
 	return (free_stacks(&stacks, 0));
 }
